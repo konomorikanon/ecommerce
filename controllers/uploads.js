@@ -39,9 +39,15 @@ const UploadsPut = async(req, res = response) => {
         case 'usuarios':
             model = await usuario.findById(id);
             if (!model) {
-                res.status(400).json({
+                return res.status(400).json({
                     msg : 'el id no esta registrado'
                 })         
+            }
+            if (model.authGoogle || model.authFacebook) {
+                return res.json({
+                    msg : 'no se puede actualizar un usuario logeado desde otra red social'
+                })
+                
             }
     
             break;

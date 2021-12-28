@@ -28,10 +28,8 @@ const verificarUsuarioId = async(id) => {
 
     if (!existsId) {
         // console.log("hola");
-        throw new Error('el id no existe,  por favor vuelve a intentar ')
-        
+        throw new Error('el id no existe,  por favor vuelve a intentar ')   
     }
-
 }
 
 module.exports = {

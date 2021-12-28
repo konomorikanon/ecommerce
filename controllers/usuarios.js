@@ -46,6 +46,13 @@ const usuariosPut = async(req, res = response) => {
         })
         
     }
+    // comprobar que el usuario no actualize su informacion mediante redes sociales
+    if (model.authGoogle || model.authFacebook) {
+        return res.json({
+            msg : 'no se puede actualizar un usuario logeado desde otra red social'
+        })
+        
+    }
     // verificadores para actualizar la password
     if(actualizarPassword && actualizarPassword !== ''){
         console.log("hola");
