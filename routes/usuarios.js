@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 const { usuariosPost, usuariosPut } = require('../controllers/usuarios');
-const { verificarEmailRepetido } = require('../helpers/verificadores_models');
+const { verificarEmailRepetido, verificarUsuarioId } = require('../helpers/verificadores_models');
 const { JWTvalidator } = require('../middlewares/jwt-validator');
 const { ValidarDatos } = require('../middlewares/validarDatos');
 
@@ -17,6 +17,7 @@ router.post('/',[
 
 router.put('/:id',[
     check('id', 'se debe introducir el id del usuario ').isMongoId(),
+    check('id').custom(verificarUsuarioId),
     check('nombre', 'el nombre del usuario es obligatorio').notEmpty(),
     check('email', 'el email no es de formato correcto').isEmail(),
     check('password', 'el password del usuario es obligatorio').isLength({min:6}),

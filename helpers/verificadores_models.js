@@ -23,8 +23,19 @@ const verificarEmailRepetido = async(email) => {
     }
 
 }
+const verificarUsuarioId = async(id) => {
+    const existsId = await usuario.findById(id);
+
+    if (!existsId) {
+        // console.log("hola");
+        throw new Error('el id no existe,  por favor vuelve a intentar ')
+        
+    }
+
+}
 
 module.exports = {
     verificarIdSlider,
-    verificarEmailRepetido
+    verificarEmailRepetido,
+    verificarUsuarioId
 }
